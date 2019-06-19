@@ -1,4 +1,4 @@
-/* esri-leaflet - v2.2.4 - Wed Mar 20 2019 16:03:22 GMT-0700 (Pacific Daylight Time)
+/* esri-leaflet - v2.2.4 - Wed Jun 19 2019 14:55:38 GMT-0700 (PDT)
  * Copyright (c) 2019 Environmental Systems Research Institute, Inc.
  * Apache-2.0 */
 (function (global, factory) {
@@ -2962,13 +2962,13 @@ var DynamicMapLayer = RasterLayer.extend({
       this.service.request('export', params, function (error, response) {
         if (error) { return; } // we really can't do anything here but authenticate or requesterror will fire
 
-        if (this.options.token) {
-          response.href += ('?token=' + this.options.token);
-        }
-        if (this.options.proxy) {
-          response.href = this.options.proxy + '?' + response.href;
-        }
         if (response.href) {
+          if (this.options.token) {
+            response.href += ('?token=' + this.options.token);
+          }
+          if (this.options.proxy) {
+            response.href = this.options.proxy + '?' + response.href;
+          }
           this._renderImage(response.href, bounds);
         } else {
           this._renderImage(response.imageData, bounds, response.contentType);
